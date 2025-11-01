@@ -3,6 +3,7 @@
 int** make_mtx(int r, int c);
 void output(const int* const* mtx);
 void rm(int** mtx, int r);
+void inputMtx(int** mtx, int r, int c);
 
 int main()
 {
@@ -24,7 +25,10 @@ int main()
     return 2;
   }
 
-  output(mtx);
+  inputMtx(mtx, rows, cols);
+
+  /*output(mtx);*/
+
   rm(mtx, rows);
 }
 
@@ -53,4 +57,15 @@ int** make_mtx(int r, int c)
     }
   }
   return mtx;
+}
+
+void inputMtx(int** mtx, int r, int c)
+{
+  for (size_t i = 0; i < r; ++i)
+  {
+    for (size_t j = 0; j < c; ++j)
+    {
+      std::cin >> mtx[i][j];
+    }
+  }
 }
