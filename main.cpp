@@ -1,9 +1,9 @@
 #include <iostream>
 
 int** make_mtx(int r, int c);
-void output(const int* const* mtx);
+void output(int** mtx, int r, int c);
 void rm(int** mtx, int r);
-void inputMtx(int** mtx, int r, int c);
+void input_mtx(int** mtx, int r, int c);
 
 int main()
 {
@@ -25,9 +25,14 @@ int main()
     return 2;
   }
 
-  inputMtx(mtx, rows, cols);
+  input_mtx(mtx, rows, cols);
+  if (std::cin.fail())
+  {
+    rm(mtx, rows);
+    return 1;
+  }
 
-  /*output(mtx);*/
+  output(mtx, rows, cols);
 
   rm(mtx, rows);
 }
@@ -59,7 +64,7 @@ int** make_mtx(int r, int c)
   return mtx;
 }
 
-void inputMtx(int** mtx, int r, int c)
+void input_mtx(int** mtx, int r, int c)
 {
   for (size_t i = 0; i < r; ++i)
   {
@@ -67,5 +72,18 @@ void inputMtx(int** mtx, int r, int c)
     {
       std::cin >> mtx[i][j];
     }
+  }
+}
+
+
+void output(int** mtx, int r, int c)
+{
+  for (size_t i = 0; i < r; ++i)
+  {
+    for (size_t j = 0; j < c - 1; ++j)
+    {
+      std::cout << mtx[i][j] << " ";
+    }
+    std::cout << mtx[i][c - 1] << "\n";
   }
 }
