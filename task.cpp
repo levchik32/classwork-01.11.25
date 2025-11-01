@@ -11,10 +11,21 @@ int main()
 
 int** convert(const int* t, size_t n, const size_t* lns, size_t rows)
 {
-  
+  int** mtx = make(rows, lns);
+
+  size_t k = 0;
+  for (size_t i; i < rows; ++i)
+  {
+    size_t cols = lns[i];
+    for (size_t j; j < cols; ++j)
+    {
+      mtx[i][j] = t[k];
+      k += 1;
+    }
+  }
 }
 
-int** make(size_t r, size_t* lns)
+int** make(size_t r, const size_t* lns)
 {
   int** mtx = new int* [r];
   for (size_t i = 0; i < r; ++i)
