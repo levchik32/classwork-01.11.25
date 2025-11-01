@@ -15,15 +15,42 @@ int main()
   }
 
   int** mtx = nullptr;
-  mtx = make_mtx(rows, cols);
+  try
+  {
+    mtx = make_mtx(rows, cols);
+  }
+  catch (const std::bad_alloc&e)
+  {
+    return 2;
+  }
+
   output(mtx);
-  rm(mtx, rows, cols);
+  rm(mtx, rows);
 }
 
 void rm (int** mtx, int r)
 {
-  for (size_t i; i < r; ++i)
+  for (size_t i = 0; i < r; ++i)
   {
     delete[] mtx[i];
   }
+  delete[] mtx;
+}
+
+int** make_mtx(int r, int c)
+{
+  int** mtx = new int* [r];
+  for (size_t i = 0; i < r; ++i)
+  {
+    try
+    {
+      mtx[i] = new int[c];
+    }
+    catch(const std::bad_alloc&e)
+    {
+      rm(mtx, i);
+      throw;
+    }
+  }
+  return mtx;
 }
