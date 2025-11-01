@@ -12,7 +12,15 @@ int main()
   size_t lns[] = {4, 2, 5, 1};
   size_t rows = 4;
 
-  int** mtx = convert(t, n, lns, rows);
+  int** mtx = nullptr;
+  try
+  {
+    mtx = convert(t, n, lns, rows);
+  }
+  catch (const std::bad_alloc&e)
+  {
+    return 2;
+  }
 
   output(mtx, rows, lns);
 
