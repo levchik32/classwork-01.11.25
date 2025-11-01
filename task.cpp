@@ -1,13 +1,22 @@
 #include <iostream>
 
 int** convert(const int* t, size_t n, const size_t* lns, size_t rows);
-int** make(int r, const size_t* lns);
-void rm(int** mtx, int r);
-void output(int** mtx, int r, const size_t* lns);
+int** make(size_t r, const size_t* lns);
+void rm(int** mtx, size_t r);
+void output(int** mtx, size_t r, const size_t* lns);
 
 int main()
 {
+  int t[] ={5, 5, 5, 5, 6, 6, 7, 7, 7, 7, 7, 8};
+  size_t n = 0;
+  size_t lns[] = {4, 2, 5, 1};
+  size_t rows = 4;
 
+  int** mtx = convert(t, n, lns, rows);
+
+  output(mtx, rows, lns);
+
+  rm(mtx, rows);
 }
 
 int** convert(const int* t, size_t n, const size_t* lns, size_t rows)
@@ -15,10 +24,10 @@ int** convert(const int* t, size_t n, const size_t* lns, size_t rows)
   int** mtx = make(rows, lns);
 
   size_t k = 0;
-  for (size_t i; i < rows; ++i)
+  for (size_t i = 0; i < rows; ++i)
   {
     size_t cols = lns[i];
-    for (size_t j; j < cols; ++j)
+    for (size_t j = 0; j < cols; ++j)
     {
       mtx[i][j] = t[k];
       k += 1;
@@ -46,7 +55,7 @@ int** make(size_t r, const size_t* lns)
   return mtx;
 }
 
-void rm (int** mtx, int r)
+void rm (int** mtx, size_t r)
 {
   for (size_t i = 0; i < r; ++i)
   {
@@ -55,7 +64,7 @@ void rm (int** mtx, int r)
   delete[] mtx;
 }
 
-void output(int** mtx, int r, const size_t* lns)
+void output(int** mtx, size_t r, const size_t* lns)
 {
   for (size_t i = 0; i < r; ++i)
   {
